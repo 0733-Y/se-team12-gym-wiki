@@ -26,55 +26,78 @@
 - Python 3.12 이상
 - Node.js 20.19 이상 또는 22.12 이상
 
-## 백엔드 실행
+## 설치
+
+저장소 루트에서 설치 스크립트를 한 번 실행합니다. 가상환경 생성, 파이썬 패키지 설치, DB 마이그레이션, 운동 데이터와 이미지 가져오기, `npm install`까지 한 번에 처리합니다.
+
+macOS / Linux / Git Bash:
+
+```bash
+bash scripts/setup.sh
+```
+
+Windows PowerShell:
+
+```bash
+powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
+```
+
+- 인터넷 연결이 필요합니다. 운동 132개와 이미지(약 7 MB)를 공개 데이터 [yuhonas/free-exercise-db](https://github.com/yuhonas/free-exercise-db)(Unlicense, 퍼블릭 도메인)에서 내려받습니다.
+- 여러 번 실행해도 안전합니다. 이미 있는 가상환경·이미지는 다시 만들거나 받지 않습니다.
+- **운동 이미지(`backend/media/`)와 DB(`backend/db.sqlite3`)는 git에 들어 있지 않습니다. 다른 PC로 옮기거나 새로 clone한 뒤에는 설치 스크립트를 다시 실행해야 합니다.** 실행하지 않으면 운동 목록이 비어 있습니다.
+- 이미지 없이 빠르게 설치하려면 `bash scripts/setup.sh --skip-images` 또는 `scripts\setup.ps1 -SkipImages`. 이 경우 카드에 "이미지 없음"이 표시됩니다.
+
+## 실행
+
+터미널 두 개에서 각각 실행합니다.
 
 ```bash
 cd backend
-python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py import_exercises   # 운동 132개와 이미지를 내려받음 (인터넷 필요)
-python manage.py runserver          # http://127.0.0.1:8000
+python manage.py runserver       # http://127.0.0.1:8000
 ```
 
-`import_exercises`는 공개 데이터 [yuhonas/free-exercise-db](https://github.com/yuhonas/free-exercise-db)(Unlicense, 퍼블릭 도메인)에서 근력 운동을 가져옵니다. 여러 번 실행해도 중복되지 않습니다.
+```bash
+cd frontend
+npm run dev                      # http://localhost:5173
+```
+
+브라우저에서 `http://localhost:5173`을 엽니다. 백엔드의 CORS 기본 허용 주소가 이 값이므로 다른 포트를 쓰면 요청이 막힙니다.
+
+같은 Wi-Fi의 휴대폰에서 확인하려면 `scripts/dev-lan.sh`(또는 `scripts\dev-lan.ps1`)를 사용합니다. 절차는 [docs/MOBILE_TEST.md](docs/MOBILE_TEST.md)에 있습니다.
+
+### 운동 데이터 다시 가져오기
+
+설치 스크립트가 실행하는 명령을 직접 실행할 수도 있습니다.
+
+```bash
+cd backend && python manage.py import_exercises
+```
 
 | 옵션 | 설명 |
 | --- | --- |
 | `--limit-per-group N` | 세부 근육마다 가져올 운동 수 (기본 6) |
-| `--skip-images` | 이미지를 내려받지 않음 |
+| `--skip-images` | 이미지를 내려받지 않음 (이미 받은 이미지는 연결) |
 | `--prune` | 이전에 가져왔지만 이번 선택에 없는 운동을 삭제 |
 | `--data-file 경로` | 인터넷 대신 로컬 JSON 파일에서 읽음 |
-
-이미지는 `backend/media/`에 저장되며 git에 포함되지 않습니다. 새 환경에서는 `import_exercises`를 다시 실행하세요.
-
-## 프론트엔드 실행
-
-```bash
-cd frontend
-cp .env.example .env             # VITE_API_BASE 설정
-npm install
-npm run dev                      # http://localhost:5173
-```
-
-개발 서버 주소는 `http://localhost:5173`을 사용하세요. 백엔드의 CORS 기본 허용 주소가 이 값입니다.
 
 ## 테스트
 
 ```bash
-# 백엔드 (38건)
+# 백엔드
 cd backend && python manage.py test
 
-# 프론트엔드 단위 테스트 (191건)
+# 프론트엔드 단위 테스트
 cd frontend && npm run test
 
-# 종단 간 테스트 (45건). 백엔드가 실행 중이고 import_exercises를 마친 상태여야 함
-cd frontend && npx playwright install chromium   # 최초 1회
+# 종단 간 테스트
+cd frontend && npx playwright install chromium firefox webkit   # 최초 1회
 cd frontend && npm run e2e
 ```
 
-주의: 종단 간 테스트는 `demo` 사용자의 실수 노트 전체와 오늘 기준 앞뒤 45일의 훈련 기록을 지웁니다.
+종단 간 테스트는 서버를 직접 띄울 필요가 없습니다. Playwright가 테스트 전용 백엔드(포트 8001, DB `backend/db.e2e.sqlite3`)와 프론트엔드(포트 5174)를 스스로 시작하고, 매번 빈 DB에 테스트용 운동 97개를 넣은 뒤 실행합니다. 개발용 DB(`db.sqlite3`)는 건드리지 않습니다.
+
+Firefox가 실행되지 않는 PC에서는 `npm run e2e:local`(Chromium, WebKit, iPhone 13 에뮬레이션)을 사용하세요.
 
 결과는 [docs/TEST_REPORT.md](docs/TEST_REPORT.md)에 있습니다.
 
@@ -84,6 +107,7 @@ cd frontend && npm run e2e
 | --- | --- | --- |
 | `DJANGO_SECRET_KEY` | 백엔드 | 개발용 키 |
 | `CORS_ALLOWED_ORIGINS` | 백엔드 | `http://localhost:5173` (쉼표로 여러 개) |
+| `GYM_DB_NAME` | 백엔드 | `db.sqlite3` (종단 간 테스트는 `db.e2e.sqlite3`) |
 | `VITE_API_BASE` | 프론트엔드 | `http://127.0.0.1:8000` |
 
 ## 구조
@@ -104,6 +128,7 @@ frontend/src/
   views/       화면 6개
   components/  layout, library, feedback, plan, log, tools
 frontend/e2e/  Playwright 테스트
+scripts/       설치 스크립트 (setup), 휴대폰 확인용 실행 스크립트 (dev-lan)
 ```
 
 ## 문서
