@@ -27,3 +27,21 @@
 - **问题**：`PUT`/`DELETE /training-logs/{date}/items/{id}/` 的返回内容 5 节没有规定。
   **原因**：前端需要用服务器返回值更新 store（6.3 节"收到成功响应才更新"）。
   **解决**：两者都返回 200 和当天日志；删除最后一项后返回 `data: null`。`exercises` 模型的新字段（`difficulty`、`muscle_groups`、`source_*` 等）在 P1 一次建好，P2 只负责导入填充。
+
+## P2 动作导入命令
+
+- **问题**：旧前端 `MUSCLE_FILTERS` 有 17 个 id（`forearms-front` 与 `forearms-back` 分开），ARCHITECTURE.md 4.2 是 16 个（只有 `forearms`）。
+  **原因**：旧代码按肌肉图正反面各建一个小臂筛选项，两者对应的动作完全相同。
+  **解决**：以 4.2 的 16 个为准，导入时小臂统一写 `forearms`；P3 的 `muscleFilters.js` 让正反面两块 SVG 区域都映射到 `forearms`。小腿 `calves-front` / `calves-back` 两个都保留，导入时一起写入。
+- **问题**：`Palms-Up Barbell Wrist Curl Over A Bench` 被判定为二头肌，分类却是胸部。
+  **原因**：旧动作名规则里 `curl → biceps` 排在 `wrist → forearms` 前面；旧选取逻辑用分组的分类，而这个名字含 `bench`，先命中胸部分组。
+  **解决**：`wrist|forearm|grip…` 规则移到 `biceps|curl` 之前；分类改为按源数据的肌肉判定（`map_category`），判定不出时才用分组的分类。T7 里有对应用例。
+- **问题**：旧导入命令会跳过数据库里已有的动作名，不满足"可重复执行"。
+  **原因**：旧逻辑是"只追加新动作"。
+  **解决**：去掉跳过逻辑，以 `name` 为键 `update_or_create`；`reviewed`（人工抽检）和 `video` 不在更新字段里，重复导入不覆盖。另外把 `EXERCISE_GROUP_OVERRIDES` 中源数据里有的动作也一并选入，保证 Barbell Squat、Face Pull 等核心动作在库里。
+- **问题**：许可信息要以源仓库 LICENSE 文件的实际内容为准，但 `LICENSE` 路径返回 404。
+  **原因**：该仓库的文件名是 `LICENSE.md`。
+  **解决**：读了 `LICENSE.md`，内容为 The Unlicense（公有领域），`source_license` 写 `Unlicense (public domain)`。
+- **问题**：T7 不能依赖网络。
+  **解决**：新增 `--data-file` 参数读本地 JSON；测试用从源数据截取的 8 条真实记录（`exercises/tests/fixtures/sample_exercises.json`），配合 `--skip-images` 离线运行。
+- **结果**：实际导入 118 个动作、118 张图片（约 7 MB，在 `backend/media/`，不进 git）；16 个肌群都有动作；第二次运行显示 0 created、118 updated。
