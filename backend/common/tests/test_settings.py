@@ -49,3 +49,31 @@ class DatabaseNameTests(SimpleTestCase):
 
     def test_env_selects_other_file(self):
         self.assertEqual(self._db_name({'GYM_DB_NAME': 'db.e2e.sqlite3'}), 'db.e2e.sqlite3')
+
+
+class AllowedHostsTests(SimpleTestCase):
+    """DJANGO_ALLOWED_HOSTS 在默认的本机地址之外追加局域网 IP（scripts/dev-lan）。"""
+
+    def _hosts(self, value):
+        import os
+        import subprocess
+        import sys
+
+        code = (
+            'import django; from django.conf import settings; django.setup(); '
+            "print(','.join(settings.ALLOWED_HOSTS))"
+        )
+        env = {key: val for key, val in os.environ.items() if key != 'DJANGO_ALLOWED_HOSTS'}
+        env['DJANGO_SETTINGS_MODULE'] = 'config.settings'
+        if value is not None:
+            env['DJANGO_ALLOWED_HOSTS'] = value
+        out = subprocess.run([sys.executable, '-c', code], cwd=settings.BASE_DIR, env=env,
+                             capture_output=True, text=True, check=True)
+        return out.stdout.strip().split(',')
+
+    def test_default_has_only_local_hosts(self):
+        self.assertEqual(self._hosts(None), ['127.0.0.1', 'localhost', 'testserver'])
+
+    def test_env_adds_lan_ip(self):
+        hosts = self._hosts(' 192.168.50.142 , ,10.0.0.7')
+        self.assertEqual(hosts, ['127.0.0.1', 'localhost', 'testserver', '192.168.50.142', '10.0.0.7'])

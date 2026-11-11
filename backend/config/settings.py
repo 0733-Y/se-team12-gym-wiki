@@ -26,7 +26,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-dev-key-for-gy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
+# 局域网里用手机访问时（scripts/dev-lan），用 DJANGO_ALLOWED_HOSTS 追加电脑的局域网 IP，逗号分隔
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver'] + [
+    host.strip() for host in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if host.strip()
+]
 
 
 # Application definition

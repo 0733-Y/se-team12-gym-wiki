@@ -97,6 +97,8 @@ cd frontend && npm run e2e
 
 종단 간 테스트는 서버를 직접 띄울 필요가 없습니다. Playwright가 테스트 전용 백엔드(포트 8001, DB `backend/db.e2e.sqlite3`)와 프론트엔드(포트 5174)를 스스로 시작하고, 매번 빈 DB에 테스트용 운동 97개를 넣은 뒤 실행합니다. 개발용 DB(`db.sqlite3`)는 건드리지 않습니다.
 
+휴대폰 접속 스크립트의 IP 판별 로직은 `node --test scripts/`로 테스트합니다.
+
 Firefox가 실행되지 않는 PC에서는 `npm run e2e:local`(Chromium, WebKit, iPhone 13 에뮬레이션)을 사용하세요.
 
 결과는 [docs/TEST_REPORT.md](docs/TEST_REPORT.md)에 있습니다.
