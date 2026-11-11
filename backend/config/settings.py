@@ -84,6 +84,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'OPTIONS': {
+            # 事务一开始就拿写锁，并发写请求排队等待（最多 timeout 秒）。
+            # 默认的 DEFERRED 模式下，先读后写的事务在升级锁时会立刻报 "database is locked"。
+            'transaction_mode': 'IMMEDIATE',
+            'timeout': 20,
+        },
     }
 }
 

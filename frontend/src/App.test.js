@@ -16,6 +16,13 @@ vi.mock('@/api/wrongBook.js', () => ({
   editWrong: vi.fn(),
   removeWrong: vi.fn(),
 }))
+vi.mock('@/api/trainingLogs.js', () => ({
+  fetchLogRange: vi.fn().mockResolvedValue([]),
+  fetchLogDay: vi.fn().mockResolvedValue(null),
+  fetchLogStats: vi.fn().mockResolvedValue({ series: [], summary: { days: 28, workout_days: 0, completed_total: 0, streak: 0 } }),
+  completeItem: vi.fn(),
+  uncompleteItem: vi.fn(),
+}))
 
 const PAGES = [
   ['/library', 'navLibrary'],
