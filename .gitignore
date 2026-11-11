@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.sqlite3
+backend/media/
+.env
+
+# Node
+node_modules/
+dist/
+frontend/.env
+frontend/.env.local
+frontend/test-results/
+frontend/playwright-report/
+coverage/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
