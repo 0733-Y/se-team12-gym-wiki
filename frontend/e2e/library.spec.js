@@ -20,7 +20,8 @@ test.describe('E1 动作库', () => {
     expect(await cards(page).count()).toBeGreaterThan(50)
     const first = cards(page).first()
     await expect(first.locator('h3')).not.toBeEmpty()
-    await expect(first.locator('img')).toHaveAttribute('src', /\/media\/exercises\//)
+    // 测试库导入时不下载图片：本机已有图片就显示图片，没有就显示占位文字
+    await expect(first.locator('img[src*="/media/exercises/"], .exercise-card__no-image')).toHaveCount(1)
   })
 
   test('韩文、中文、英文搜索同一个动作得到同一组结果', async ({ page }) => {

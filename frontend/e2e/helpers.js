@@ -1,5 +1,6 @@
 // 端到端测试共用：直接调后端接口准备和清理数据
-export const API = 'http://127.0.0.1:8000/api'
+// 测试专用后端（playwright.config.js 启动，数据库是 db.e2e.sqlite3）。这里的清数据只会动测试库。
+export const API = 'http://127.0.0.1:8001/api'
 
 export async function exerciseIdByName(request, name) {
   const body = await (await request.get(`${API}/exercises/`)).json()

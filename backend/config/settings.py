@@ -83,7 +83,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 端到端测试用 GYM_DB_NAME=db.e2e.sqlite3 指向单独的库，不碰开发数据
+        'NAME': BASE_DIR / os.environ.get('GYM_DB_NAME', 'db.sqlite3'),
         'OPTIONS': {
             # 事务一开始就拿写锁，并发写请求排队等待（最多 timeout 秒）。
             # 默认的 DEFERRED 模式下，先读后写的事务在升级锁时会立刻报 "database is locked"。

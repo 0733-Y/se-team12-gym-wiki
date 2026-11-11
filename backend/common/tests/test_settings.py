@@ -22,3 +22,30 @@ class P0SettingsTests(SimpleTestCase):
     def test_admin_reachable(self):
         resp = self.client.get('/admin/login/')
         self.assertEqual(resp.status_code, 200)
+
+
+class DatabaseNameTests(SimpleTestCase):
+    """GYM_DB_NAME 决定用哪个 SQLite 文件（端到端测试用单独的库）。"""
+
+    def _db_name(self, env):
+        # 设置在导入时读环境变量，所以起一个新进程来看结果
+        import os
+        import subprocess
+        import sys
+        from pathlib import Path
+
+        code = (
+            'import django; from django.conf import settings; django.setup(); '
+            "print(settings.DATABASES['default']['NAME'])"
+        )
+        full_env = {key: value for key, value in os.environ.items() if key != 'GYM_DB_NAME'}
+        full_env.update({'DJANGO_SETTINGS_MODULE': 'config.settings', **env})
+        out = subprocess.run([sys.executable, '-c', code], cwd=settings.BASE_DIR, env=full_env,
+                             capture_output=True, text=True, check=True)
+        return Path(out.stdout.strip()).name
+
+    def test_default_is_dev_database(self):
+        self.assertEqual(self._db_name({}), 'db.sqlite3')
+
+    def test_env_selects_other_file(self):
+        self.assertEqual(self._db_name({'GYM_DB_NAME': 'db.e2e.sqlite3'}), 'db.e2e.sqlite3')

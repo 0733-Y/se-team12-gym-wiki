@@ -4,6 +4,8 @@ __pycache__/
 .venv/
 venv/
 *.sqlite3
+# 端到端测试专用数据库（每次运行重建）
+backend/db.e2e.sqlite3*
 backend/media/
 .env
 

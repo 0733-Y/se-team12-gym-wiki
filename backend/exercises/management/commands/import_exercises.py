@@ -55,11 +55,15 @@ class Command(BaseCommand):
         with transaction.atomic():
             for exercise, category in selected:
                 fields = importing.build_fields(exercise, category)
-                if not options['skip_images'] and exercise.get('images'):
-                    image_name = self.download_first_image(exercise, image_dir)
+                if exercise.get('images'):
+                    if options['skip_images']:
+                        # 不下载；但本机已有这张图时照样关联上
+                        image_name = self.existing_image(exercise, image_dir)
+                    else:
+                        image_name = self.download_first_image(exercise, image_dir)
+                        image_count += bool(image_name)
                     if image_name:
                         fields['standard_image'] = image_name
-                        image_count += 1
                 # reviewed（人工抽检）与 video 不在 defaults 里，重复导入不覆盖
                 _, created = Exercise.objects.update_or_create(name=exercise['name'].strip(), defaults=fields)
                 if created:
@@ -95,10 +99,18 @@ class Command(BaseCommand):
         except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
             raise CommandError(f'Could not download exercise data: {exc}') from exc
 
+    def image_filename(self, exercise):
+        image_path = exercise['images'][0]
+        return f"{importing.slugify(exercise['name'])}{Path(image_path).suffix or '.jpg'}"
+
+    def existing_image(self, exercise, image_dir):
+        filename = self.image_filename(exercise)
+        return (IMAGE_SUBDIR / filename).as_posix() if (image_dir / filename).exists() else ''
+
     def download_first_image(self, exercise, image_dir):
         """下载第一张图；已存在则复用，失败只跳过并打印。返回相对 MEDIA_ROOT 的路径或空串。"""
         image_path = exercise['images'][0]
-        filename = f"{importing.slugify(exercise['name'])}{Path(image_path).suffix or '.jpg'}"
+        filename = self.image_filename(exercise)
         local_path = image_dir / filename
         if not local_path.exists():
             url = importing.IMAGE_BASE_URL + quote(image_path.replace('\\', '/'))
