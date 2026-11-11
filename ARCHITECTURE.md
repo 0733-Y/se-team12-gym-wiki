@@ -50,6 +50,7 @@ gym-wiki/
 ├── CLAUDE.md                  # Claude Code 工作规则
 ├── ARCHITECTURE.md            # 本文件
 ├── README.md                  # 启动方法（韩文）
+├── scripts/                   # setup.sh/.ps1 一键安装；dev-lan.sh/.ps1 手机测试；翻译审校导出
 ├── docs/
 │   ├── API.md                 # API 明细（最终产出物）
 │   ├── TEST_REPORT.md         # 验收测试结果（最终产出物）
@@ -67,7 +68,7 @@ gym-wiki/
     ├── package.json
     ├── vite.config.js
     ├── .env.example           # VITE_API_BASE=http://127.0.0.1:8000
-    ├── e2e/                   # Playwright
+    ├── e2e/                   # Playwright；自己启动前后端，用独立数据库 db.e2e.sqlite3
     └── src/                   # 见第6节
 ```
 
@@ -332,6 +333,12 @@ export const STRATEGIES = {
 | T6 | `backend/common/tests/` | 非法参数、不存在的 id、错误的日期格式 | 返回对应 HTTP 状态码与统一错误格式 |
 | T7 | `backend/exercises/tests/` | 导入后的每个动作 | `source_name`、`muscle_groups` 非空 |
 | E1–E4 | `frontend/e2e/` | E1 搜索与肌肉筛选；E2 自检 → 易错本 → 刷新仍在；E3 易错动作出现在计划 → 完成 → 日志里当天有记录；E4 在 360×740 与 1280×800 下重复 E1–E3 的关键点击 | 全部通过 |
+
+端到端测试的隔离与浏览器范围（收尾阶段修订）：
+
+- 后端读环境变量 `GYM_DB_NAME`（默认 `db.sqlite3`）。Playwright 的 `webServer` 用 `db.e2e.sqlite3` 在 8001 端口启动测试专用后端，每次先删库、`migrate`、离线导入 `e2e/fixtures/exercises.json`（`--skip-images`），前端在 5174 端口。用例里的清数据只会动测试库，开发库不受影响。
+- 浏览器项目：`desktop`（Chromium 1280×800）、`mobile`（Chromium 360×740）、`webkit`、`firefox`、`iphone13`（WebKit 的 iPhone 13 模拟）。E1–E3 在 desktop / webkit / firefox 下跑；E4（`responsive.spec.js`）在 desktop / mobile / iphone13 下跑。
+- 手机局域网测试用 `scripts/dev-lan`：后端环境变量 `DJANGO_ALLOWED_HOSTS` 追加局域网 IP，`CORS_ALLOWED_ORIGINS` 放行 `http://<IP>:5173`，前端 `VITE_API_BASE` 指向 `http://<IP>:8000`。真机点检表见 `docs/MOBILE_TEST.md`。
 
 结果写入 `docs/TEST_REPORT.md`（韩文，表格：项目、场景、预期、实际、通过与否）。
 
