@@ -147,3 +147,4 @@
 
 ## 交付前收尾
 - **端到端测试隔离数据**：问题是跑 E2E 会清空开发库里 demo 用户的易错本和训练日志。后端加了环境变量 `GYM_DB_NAME`（默认 `db.sqlite3`）；Playwright 的 `webServer` 自己启动一套前后端（后端 8001 端口、库 `db.e2e.sqlite3`，前端 5174 端口），启动前删旧库、`migrate`、用 `--data-file e2e/fixtures/exercises.json --skip-images` 离线导入 97 个动作。用例的清数据请求都发往 8001，只会动测试库。没有按原话用联网导入，是因为每次跑测试都下载 1 MB 源数据又慢又依赖网络；`--skip-images` 现在会关联本机已有的图片，没有图片时卡片显示占位文字，E1 的断言相应放宽。44 个用例通过、1 个按设计跳过，运行后 8001 / 5174 端口都已释放。
+- **浏览器覆盖**：`playwright.config.js` 增加 `firefox`、`webkit`（全部用例，1280×800）和 `iphone13`（E4）三个项目，并安装了 Firefox 和 WebKit。WebKit 36 个、iPhone 13 模拟 8 个全部通过（1 个按设计跳过），没有只在这两个引擎上失败的用例，不需要改代码。Firefox **未验证**：这台机器上 Playwright 的 Firefox 159.0 起不来，36 个用例都在启动浏览器时报 `browserType.launch: spawn UNKNOWN`，Windows 事件日志是 SideBySide 错误"找不到从属程序集 mozglue"；`--force` 重装后一样，`mozglue.dll` 文件在、Smart App Control 是关的，没有再往下查。原因已如实写进 TEST_REPORT.md 的 4.5 节。在这台机器上跑端到端要排除 firefox：`npm run e2e:local`。

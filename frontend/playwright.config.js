@@ -26,6 +26,11 @@ export default defineConfig({
       testMatch: /responsive\.spec\.js/,
       use: { ...devices['Desktop Chrome'], viewport: { width: 360, height: 740 }, hasTouch: true },
     },
+    // 其他浏览器引擎：全部用例在 1280×800 下各跑一遍
+    { name: 'firefox', use: { ...devices['Desktop Firefox'], viewport: { width: 1280, height: 800 } } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'], viewport: { width: 1280, height: 800 } } },
+    // iPhone 13 模拟（WebKit 引擎、390×664、触摸、手机 UA）。是模拟，不等于真机
+    { name: 'iphone13', testMatch: /responsive\.spec\.js/, use: { ...devices['iPhone 13'] } },
   ],
   webServer: [
     {

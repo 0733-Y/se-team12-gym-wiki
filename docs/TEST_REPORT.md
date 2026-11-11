@@ -153,6 +153,24 @@ cd frontend && npm run e2e
 
 건너뛴 1건: 분기점 부근 너비 검사는 화면 너비를 테스트 안에서 직접 바꾸므로 한 번만 실행하면 됩니다. mobile 프로젝트에서는 의도적으로 건너뜁니다.
 
+### 4.5 브라우저별 결과
+
+같은 E2E 테스트를 Playwright가 제공하는 세 가지 브라우저 엔진과 iPhone 13 에뮬레이션으로 실행했습니다.
+
+| 프로젝트 | 엔진 | 화면 | 실행 범위 | 결과 |
+| --- | --- | --- | --- | --- |
+| `desktop` | Chromium | 1280×800 | E1–E4 전체 (36건) | 36건 통과 |
+| `mobile` | Chromium | 360×740, 터치 | E4 (9건) | 8건 통과, 1건 의도된 건너뜀 |
+| `webkit` | WebKit 27.2 (Safari 엔진) | 1280×800 | E1–E4 전체 (36건) | 36건 통과 |
+| `iphone13` | WebKit, iPhone 13 에뮬레이션 (390×664, 터치, 모바일 UA) | | E4 (9건) | 8건 통과, 1건 의도된 건너뜀 |
+| `firefox` | Firefox 159.0 | 1280×800 | E1–E4 전체 (36건) | **미검증** |
+
+WebKit과 iPhone 13 에뮬레이션에서만 실패하는 테스트는 없었고, 코드를 고칠 필요가 없었습니다.
+
+**Firefox 미검증 사유**: 이 PC에서 Playwright용 Firefox 159.0이 실행되지 않았습니다. 테스트 36건 모두 브라우저를 띄우는 단계에서 `browserType.launch: spawn UNKNOWN`으로 끝났고, 앱 코드는 한 줄도 실행되지 않았습니다. Windows 이벤트 로그에는 `firefox.exe`의 활성화 컨텍스트를 만들지 못했다(종속 어셈블리 `mozglue`를 찾을 수 없음)는 SideBySide 오류가 남았습니다. `npx playwright install --force firefox`로 다시 받아도 같았습니다. `mozglue.dll` 파일은 설치 폴더에 있고 Smart App Control은 꺼져 있어, 원인은 이 Playwright Firefox 빌드와 이 PC의 Windows 환경 사이의 문제로 보이며 더 추적하지 않았습니다. Firefox 프로젝트 설정은 `playwright.config.js`에 남겨 두었으므로 Firefox가 실행되는 PC에서는 `npx playwright test --project=firefox`로 검증할 수 있습니다.
+
+iPhone 13은 에뮬레이션입니다. 실제 기기에서의 확인은 `docs/MOBILE_TEST.md`의 점검표로 진행합니다.
+
 ## 5. 시험 중 발견해 수정한 결함
 
 | 발견 단계 | 증상 | 원인 | 조치 |
