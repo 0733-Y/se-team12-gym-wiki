@@ -12,13 +12,18 @@ import { filterByGroup, search } from '@/domain/search.js'
 import { exerciseName, muscleLabel } from '@/i18n/exerciseLocale.js'
 import { useExercisesStore } from '@/stores/exercises.js'
 import { useUiStore } from '@/stores/ui.js'
+import { useWrongBookStore } from '@/stores/wrongBook.js'
 
 const ui = useUiStore()
 const store = useExercisesStore()
 const route = useRoute()
 const router = useRouter()
 
-onMounted(() => store.ensureLoaded())
+onMounted(() => {
+  store.ensureLoaded()
+  // 卡片上要标出哪些动作在易错本里；取不到时不影响动作库本身
+  useWrongBookStore().ensureLoaded()
+})
 
 const group = computed({
   get: () => (MUSCLE_GROUP_IDS.includes(route.query.group) ? route.query.group : 'all'),

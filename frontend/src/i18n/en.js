@@ -246,4 +246,12 @@ export default {
   muscleFilter: 'Muscle filter',
   bodyMapHint: 'Tap the body map or a button below to filter exercises.',
   noImage: 'No image',
+  // P5 新增：自检与易错本
+  priorityRemind: 'Prioritize in my next plan',
+  saving: 'Saving…',
+  wrongBookAddHint: 'This exercise is not in your mistake book yet. Pick a reason, note what tends to go wrong, then add it.',
+  selfCheckSaved: 'Self-check result saved to the mistake book',
+  reviewPrompt: 'After practicing this exercise again, did you get it right this time?',
+  lastReviewed: 'Last reviewed',
+  inWrongBook: 'In mistake book',
 }

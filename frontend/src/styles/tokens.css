@@ -12,6 +12,9 @@
   --danger: #b91c1c;
   --danger-soft: #fdecec;
   --danger-text: #8f1616;
+  --warning: #b45309;
+  --warning-soft: #fdf1dc;
+  --success-soft: #e3f4e8;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -42,6 +45,9 @@
     --danger: #f87171;
     --danger-soft: #3a1717;
     --danger-text: #fca5a5;
+    --warning: #fbbf24;
+    --warning-soft: #3a2a0c;
+    --success-soft: #12301c;
     --shadow: 0 6px 20px rgb(0 0 0 / 0.5);
   }
 }

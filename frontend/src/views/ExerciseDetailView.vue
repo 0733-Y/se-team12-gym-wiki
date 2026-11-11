@@ -1,23 +1,30 @@
 <script setup>
 // 动作详情（F01）：图片、三语名称与说明、目标肌群、难度、器械、数据来源（N03）。
-// 自检与易错本在 P5 加入。
+// 下方是训练后自检与易错本编辑（F02）。
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { mediaUrl } from '@/api/http.js'
+import SelfCheckForm from '@/components/feedback/SelfCheckForm.vue'
+import WrongRecordEditor from '@/components/feedback/WrongRecordEditor.vue'
 import ApiStatusBanner from '@/components/layout/ApiStatusBanner.vue'
 import BodyMap from '@/components/library/BodyMap.vue'
 import { FILTER_BY_ID } from '@/data/muscleFilters.js'
 import { exerciseKeyPoints, exerciseName, exerciseSteps, muscleLabel, termLabel } from '@/i18n/exerciseLocale.js'
 import { useExercisesStore } from '@/stores/exercises.js'
 import { useUiStore } from '@/stores/ui.js'
+import { useWrongBookStore } from '@/stores/wrongBook.js'
 
 const props = defineProps({ id: { type: String, required: true } })
 
 const ui = useUiStore()
 const store = useExercisesStore()
+const wrongBook = useWrongBookStore()
 const router = useRouter()
 
-onMounted(() => store.ensureLoaded())
+onMounted(() => {
+  store.ensureLoaded()
+  wrongBook.ensureLoaded()
+})
 
 const exercise = computed(() => store.byId(props.id))
 const name = computed(() => exerciseName(exercise.value, ui.lang))
@@ -84,6 +91,9 @@ function showGroup(groupId) {
             <li v-for="(point, index) in keyPoints" :key="index">{{ point }}</li>
           </ul>
         </section>
+
+        <SelfCheckForm :exercise-id="exercise.id" />
+        <WrongRecordEditor :exercise-id="exercise.id" />
 
         <p v-if="exercise.source_name" class="detail__source">
           {{ ui.t('dataSource') }}:
@@ -216,6 +226,12 @@ function showGroup(groupId) {
   margin: 0;
   color: var(--text-muted);
   font-size: 0.8125rem;
+}
+
+/* 行内链接也给足触控高度 */
+.detail__source a {
+  display: inline-block;
+  padding: 13px 0;
 }
 
 .detail__side {

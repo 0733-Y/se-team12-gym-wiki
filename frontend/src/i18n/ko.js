@@ -246,4 +246,12 @@ export default {
   muscleFilter: '근육 필터',
   bodyMapHint: '근육 지도나 아래 버튼을 눌러 운동을 필터링하세요.',
   noImage: '이미지 없음',
+  // P5 新增：自检与易错本
+  priorityRemind: '다음 훈련 계획에 우선 배치',
+  saving: '저장 중…',
+  wrongBookAddHint: '이 운동은 아직 실수 노트에 없습니다. 오류 원인을 고르고 자주 틀리는 부분을 적은 뒤 추가하세요.',
+  selfCheckSaved: '자가 점검 결과를 실수 노트에 기록했습니다',
+  reviewPrompt: '이 운동을 다시 연습했을 때 이번에는 제대로 했나요?',
+  lastReviewed: '최근 복습',
+  inWrongBook: '실수 노트에 있음',
 }

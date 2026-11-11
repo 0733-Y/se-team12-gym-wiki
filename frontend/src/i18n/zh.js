@@ -246,4 +246,12 @@ export default {
   muscleFilter: '肌群筛选',
   bodyMapHint: '点击肌肉图或下方按钮筛选动作。',
   noImage: '暂无图片',
+  // P5 新增：自检与易错本
+  priorityRemind: '下次练习优先提醒',
+  saving: '保存中…',
+  wrongBookAddHint: '这个动作还不在易错本里。选一个错误原因，写下容易出错的地方后加入。',
+  selfCheckSaved: '已按自检结果记入易错本',
+  reviewPrompt: '复习这个动作后，这次做对了吗？',
+  lastReviewed: '最近复盘',
+  inWrongBook: '已在易错本',
 }

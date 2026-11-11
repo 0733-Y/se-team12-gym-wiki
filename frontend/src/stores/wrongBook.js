@@ -38,6 +38,10 @@ export const useWrongBookStore = defineStore('wrongBook', {
         this.status = 'error'
       }
     },
+    // 已加载过就不重复请求
+    async ensureLoaded() {
+      if (this.status === 'idle' || this.status === 'error') await this.load()
+    },
     upsert(record) {
       const index = this.records.findIndex((item) => item.exercise.id === record.exercise.id)
       if (index === -1) this.records.unshift(record)

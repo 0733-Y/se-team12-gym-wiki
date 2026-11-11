@@ -7,8 +7,15 @@ import zh from './i18n/zh.js'
 import ko from './i18n/ko.js'
 import en from './i18n/en.js'
 
-// P3 的页面是空壳，不应发请求；这里挡住以防万一
+// 单元测试不连后端
 vi.mock('@/api/exercises.js', () => ({ fetchExercises: vi.fn().mockResolvedValue([]), fetchExercise: vi.fn() }))
+vi.mock('@/api/wrongBook.js', () => ({
+  fetchWrongBook: vi.fn().mockResolvedValue([]),
+  reportWrong: vi.fn(),
+  reviewWrong: vi.fn(),
+  editWrong: vi.fn(),
+  removeWrong: vi.fn(),
+}))
 
 const PAGES = [
   ['/library', 'navLibrary'],

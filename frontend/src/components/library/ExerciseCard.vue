@@ -4,10 +4,13 @@ import { mediaUrl } from '@/api/http.js'
 import { FILTER_BY_ID } from '@/data/muscleFilters.js'
 import { exerciseName, muscleLabel, termLabel } from '@/i18n/exerciseLocale.js'
 import { useUiStore } from '@/stores/ui.js'
+import { useWrongBookStore } from '@/stores/wrongBook.js'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 
 const ui = useUiStore()
+const wrongBook = useWrongBookStore()
+const record = computed(() => wrongBook.byExerciseId(props.exercise.id))
 const name = computed(() => exerciseName(props.exercise, ui.lang))
 const primaryGroup = computed(() => props.exercise.muscle_groups?.[0])
 const image = computed(() => mediaUrl(props.exercise.standard_image))
@@ -26,6 +29,9 @@ const image = computed(() => mediaUrl(props.exercise.standard_image))
     </div>
     <div class="exercise-card__body">
       <h3 class="exercise-card__name">{{ name }}</h3>
+      <span v-if="record" class="badge exercise-card__badge" :class="`badge--${record.mastery_status}`" data-testid="card-wrong-badge">
+        {{ ui.t('inWrongBook') }} · {{ ui.t(`mastery_${record.mastery_status}`) }}
+      </span>
       <p class="exercise-card__meta">
         <span
           v-if="primaryGroup"
@@ -85,6 +91,10 @@ const image = computed(() => mediaUrl(props.exercise.standard_image))
 .exercise-card__name {
   font-size: 1rem;
   overflow-wrap: anywhere;
+}
+
+.exercise-card__badge {
+  align-self: flex-start;
 }
 
 .exercise-card__meta {
