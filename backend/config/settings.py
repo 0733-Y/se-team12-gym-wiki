@@ -135,7 +135,9 @@ CORS_ALLOWED_ORIGINS = [
     if o.strip()
 ]
 
-# 统一响应外壳与异常处理在 P1 接入 common/
+# 统一错误外壳由 common.exceptions 输出（ARCHITECTURE.md 第5节）
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ['rest_framework.renderers.JSONRenderer'],
+    'DEFAULT_PARSER_CLASSES': ['rest_framework.parsers.JSONParser'],
+    'EXCEPTION_HANDLER': 'common.exceptions.api_exception_handler',
 }
