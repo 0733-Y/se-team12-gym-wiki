@@ -102,7 +102,7 @@ test.describe('E1 动作库', () => {
     await openLibrary(page, '?group=chest')
     await page.locator('[data-exercise="Barbell Bench Press - Medium Grip"]').click()
     await expect(page).toHaveURL(/\/library\/\d+$/)
-    await expect(page.getByTestId('exercise-name')).toHaveText('中握距杠铃卧推')
+    await expect(page.getByTestId('exercise-name')).toHaveText('杠铃卧推')
     await expect(page.getByTestId('exercise-steps').locator('li').first()).toBeVisible()
     await expect(page.getByRole('button', { name: '胸部' })).toBeVisible()
     await expect(page.getByText('free-exercise-db')).toBeVisible()

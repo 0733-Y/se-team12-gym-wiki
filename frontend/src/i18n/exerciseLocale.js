@@ -2,6 +2,8 @@
 // 后端只存英文原文；中文和韩文按"精确翻译 → 词组替换 → 按肌群和器械生成"的顺序取。
 import { EXERCISE_NAME_REPLACEMENTS, EXERCISE_NAME_TRANSLATIONS } from './exerciseNames.js'
 import { EXTRA_NAME_TRANSLATIONS } from './exerciseNamesExtra.js'
+import { REVIEWED_NAME_TRANSLATIONS } from './exerciseNamesReviewed.js'
+import { REVIEWED_STEPS } from './exerciseStepsReviewed.js'
 import {
   EXERCISE_CONTENT_TRANSLATIONS,
   EXERCISE_DESCRIPTION_TRANSLATIONS,
@@ -114,6 +116,12 @@ function generatedName(exercise, lang) {
 }
 
 export function exerciseName(exercise, lang) {
+  // 审校表（AI 审校）优先；表里没有的动作走审校前的逻辑
+  return REVIEWED_NAME_TRANSLATIONS[lang]?.[contentKey(exercise)] || unreviewedExerciseName(exercise, lang)
+}
+
+/** 审校前的取名逻辑：旧翻译表 → P4 补充表 → 词组替换 → 按肌群和器械生成。导出审校对照表时也用它。 */
+export function unreviewedExerciseName(exercise, lang) {
   const rawName = String(exercise?.name || '').trim()
   if (!rawName || lang === 'en' || !EXERCISE_NAME_REPLACEMENTS[lang]) return rawName
   const key = contentKey(exercise)
@@ -164,7 +172,7 @@ export function exerciseSteps(exercise, lang) {
   if (lang === 'en' || !EXERCISE_TEXT_REPLACEMENTS[lang]) return { steps: original, generated: false }
 
   const key = contentKey(exercise)
-  const translated = EXERCISE_DESCRIPTION_TRANSLATIONS[lang]?.[key]
+  const translated = REVIEWED_STEPS[lang]?.[key] || EXERCISE_DESCRIPTION_TRANSLATIONS[lang]?.[key]
   if (translated?.length) return { steps: [...translated], generated: false }
 
   const content = EXERCISE_CONTENT_TRANSLATIONS[key]?.[lang]?.description
