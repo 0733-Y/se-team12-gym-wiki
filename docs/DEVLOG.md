@@ -45,3 +45,20 @@
 - **问题**：T7 不能依赖网络。
   **解决**：新增 `--data-file` 参数读本地 JSON；测试用从源数据截取的 8 条真实记录（`exercises/tests/fixtures/sample_exercises.json`），配合 `--skip-images` 离线运行。
 - **结果**：实际导入 118 个动作、118 张图片（约 7 MB，在 `backend/media/`，不进 git）；16 个肌群都有动作；第二次运行显示 0 created、118 updated。
+
+## P3 前端骨架
+
+- **问题**：Vitest 里 `localStorage` 是 `undefined`，17 个测试报 `Cannot read properties of undefined (reading 'clear')`。
+  **原因**：Node 22 以后自带全局 `localStorage`，没给 `--localstorage-file` 时值为 `undefined`，并且盖住了 jsdom 的实现（P0 记下的那条警告就是它）。
+  **解决**：加 `src/test/setup.js`，测试时把 `globalThis.localStorage` 换成内存版，在 `vite.config.js` 的 `setupFiles` 里引入。只影响测试，浏览器里用的是真实的 localStorage。
+- **问题**：导航切换的测试里路由停在 `/library`，并打印 `Not implemented: window.scrollTo`。
+  **原因**：除动作库外的页面是懒加载的，点一次再 `flushPromises()` 等不到组件加载完；jsdom 没实现 `scrollTo`，而路由的 `scrollBehavior` 会调用它。
+  **解决**：测试改用 `vi.waitFor` 等路由和标题都更新；`setup.js` 里给 `scrollTo` 一个空实现。
+- **问题**：`trainingLog` store 要记住"正在进行的请求"来防重复提交，但 Promise 放进 Pinia 的响应式状态后不能直接用。
+  **原因**：Vue 的响应式代理包住 Promise 后，调用 `.then` 会因接收者不对而报错。
+  **解决**：存入前用 `markRaw()` 包一下。
+- **问题**：从 7612 行的旧 `App.vue` 搬常量，手抄容易出错。
+  **解决**：写了一次性脚本按 6.2 节的行号整段切出来（界面文字、肌群标签、分化表、同义词、动作名与说明翻译），再用测试核对：三种语言各 223 个键完全一致、16 个肌群标签齐全、分化表里的肌群 id 都合法。`*_OLD` 常量没有迁移。肌肉图部位表手工改写：`MUSCLE_FILTERS` 只留 16 个 id 和颜色，另设 `BODY_REGIONS` 记录正反面区域，小臂两块区域都指向 `forearms`。
+- **问题**：`domain/` 的纯度约束靠人记容易漏。
+  **解决**：加 `domain/purity.test.js`，扫描 `domain/` 下所有文件，出现 `vue`、`pinia`、`stores/`、`api/`、`i18n/`、`localStorage`、`t(` 就失败。
+- **未做**：动作名与说明的本地化函数（旧 `localizedExerciseName` 等）留到 P4 和详情页一起做，P3 只搬了翻译表；`TOOL_META` 只有三个 id，留到 P7。新增了 10 个界面文字键（语言、重试、关闭、加载中、页面建设中、5 种错误提示），三种语言都有。

@@ -21,3 +21,6 @@ coverage/
 Thumbs.db
 .vscode/
 .idea/
+
+# Claude Code 本机配置
+.claude/

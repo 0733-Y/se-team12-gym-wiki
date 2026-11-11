@@ -1,0 +1,47 @@
+/* 设计变量。断点：720px、1120px（媒体查询里不能用变量，直接写数值）。 */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #eef0f4;
+  --border: #d9dde5;
+  --text: #171a21;
+  --text-muted: #5b6474;
+  --accent: #1d4ed8;
+  --accent-soft: #e3ebfd;
+  --success: #15803d;
+  --danger: #b91c1c;
+  --danger-soft: #fdecec;
+  --danger-text: #8f1616;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+
+  --radius: 10px;
+  --shadow: 0 6px 20px rgb(15 23 42 / 0.12);
+  --touch: 44px; /* 触控区域下限 */
+  --tabbar-height: 60px;
+  --content-max: 1240px;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1218;
+    --surface: #181c25;
+    --surface-2: #232936;
+    --border: #2f3747;
+    --text: #eef1f6;
+    --text-muted: #a3adbf;
+    --accent: #8fb0ff;
+    --accent-soft: #1d2a4a;
+    --success: #4ade80;
+    --danger: #f87171;
+    --danger-soft: #3a1717;
+    --danger-text: #fca5a5;
+    --shadow: 0 6px 20px rgb(0 0 0 / 0.5);
+  }
+}
