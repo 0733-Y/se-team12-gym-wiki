@@ -150,6 +150,7 @@ gym-wiki/
 - 来源：开源 `yuhonas/free-exercise-db`，保留原有的"每个细分肌群按得分选前 N 个"逻辑与参数 `--limit-per-group`、`--skip-images`。
 - 新增写入：`difficulty` ← 源数据 `level`，`equipment` ← `equipment`，`muscle_groups` ← 细分肌群判定结果（把旧前端 `EXERCISE_GROUP_OVERRIDES` 的人工修正并入），`source_*` 三个字段。许可信息以该仓库 LICENSE 文件的实际内容为准。
 - 以 `name` 为键 `update_or_create`，可重复执行；图片下载失败只跳过并打印。
+- P4 修订：只导入源数据里 `strength` / `powerlifting` 类的动作；按判定出的主肌群分组选前 N 个；另有一份基础动作表（深蹲、卧推、引体向上等）保证导入；`--prune` 删除本命令导入过但这次未选中的动作。
 
 ## 5. API 约定
 

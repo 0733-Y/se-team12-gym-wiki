@@ -234,4 +234,16 @@ export default {
   errConflict: '数据冲突，请刷新后重试。',
   errServer: '服务器出错，请稍后再试。',
   errNetwork: '无法连接服务器，请检查网络或后端是否已启动。',
+  // P4 新增：动作库与详情
+  difficulty: '难度',
+  equipment: '器械',
+  dataSource: '数据来源',
+  license: '许可',
+  generatedStepsNote: '这个动作暂无人工翻译，以下是通用练习提示。',
+  originalText: '英文原文',
+  exerciseNotFound: '找不到这个动作。',
+  clearSearch: '清除搜索',
+  muscleFilter: '肌群筛选',
+  bodyMapHint: '点击肌肉图或下方按钮筛选动作。',
+  noImage: '暂无图片',
 }

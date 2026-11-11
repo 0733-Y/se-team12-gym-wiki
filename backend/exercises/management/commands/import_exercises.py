@@ -25,6 +25,8 @@ class Command(BaseCommand):
                             help='Number of exercises to pick for each fine muscle group.')
         parser.add_argument('--skip-images', action='store_true',
                             help='Import text only; keep existing image fields unchanged.')
+        parser.add_argument('--prune', action='store_true',
+                            help='Delete previously imported exercises that are no longer selected.')
         parser.add_argument('--data-url', default=importing.DATA_URL,
                             help='URL of the combined free-exercise-db JSON.')
         parser.add_argument('--data-file', default=None,
@@ -65,6 +67,16 @@ class Command(BaseCommand):
                 else:
                     updated_count += 1
 
+            pruned_count = 0
+            if options['prune']:
+                # 只删本命令导入过、这次没选中的动作；手工录入的不动
+                keep = [exercise['name'].strip() for exercise, _ in selected]
+                stale = Exercise.objects.filter(source_name=importing.SOURCE_NAME).exclude(name__in=keep)
+                pruned_count = stale.count()
+                stale.delete()
+
+        if pruned_count:
+            self.stdout.write(f'Pruned {pruned_count} exercises no longer selected.')
         self.stdout.write(self.style.SUCCESS(
             f'Imported {created_count + updated_count} exercises: {created_count} created, '
             f'{updated_count} updated, {image_count} images saved.'

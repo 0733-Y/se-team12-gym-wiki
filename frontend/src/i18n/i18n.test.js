@@ -50,3 +50,12 @@ describe('肌群标签', () => {
     }
   })
 })
+
+describe('肌群标签不重名', () => {
+  it('同一语言里 16 个标签各不相同', () => {
+    for (const lang of ['zh', 'ko', 'en']) {
+      const labels = Object.values(MUSCLE_LABELS[lang])
+      expect(new Set(labels).size, lang).toBe(labels.length)
+    }
+  })
+})

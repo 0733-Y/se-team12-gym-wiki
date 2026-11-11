@@ -234,4 +234,16 @@ export default {
   errConflict: '데이터 충돌이 발생했습니다. 새로고침 후 다시 시도하세요.',
   errServer: '서버 오류가 발생했습니다. 잠시 후 다시 시도하세요.',
   errNetwork: '서버에 연결할 수 없습니다. 네트워크 또는 백엔드 실행 여부를 확인하세요.',
+  // P4 新增：动作库与详情
+  difficulty: '난이도',
+  equipment: '장비',
+  dataSource: '데이터 출처',
+  license: '라이선스',
+  generatedStepsNote: '아직 검수된 번역이 없어 일반적인 연습 안내를 표시합니다.',
+  originalText: '영어 원문',
+  exerciseNotFound: '해당 운동을 찾을 수 없습니다.',
+  clearSearch: '검색 지우기',
+  muscleFilter: '근육 필터',
+  bodyMapHint: '근육 지도나 아래 버튼을 눌러 운동을 필터링하세요.',
+  noImage: '이미지 없음',
 }

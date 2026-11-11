@@ -1,0 +1,1348 @@
+[
+{
+"id": 1,
+"name": "Barbell Bench Press - Medium Grip",
+"category": "chest",
+"muscle_groups": [
+"chest"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 2,
+"name": "Barbell Incline Bench Press - Medium Grip",
+"category": "chest",
+"muscle_groups": [
+"chest"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 4,
+"name": "Decline Barbell Bench Press",
+"category": "chest",
+"muscle_groups": [
+"chest"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 5,
+"name": "Decline Dumbbell Bench Press",
+"category": "chest",
+"muscle_groups": [
+"chest"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 6,
+"name": "Dumbbell Bench Press",
+"category": "chest",
+"muscle_groups": [
+"chest"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 8,
+"name": "Front Dumbbell Raise",
+"category": "shoulders",
+"muscle_groups": [
+"front-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 13,
+"name": "Bent Over Low-Pulley Side Lateral",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 14,
+"name": "One-Arm Side Laterals",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 15,
+"name": "Seated Side Lateral Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 16,
+"name": "Side Lateral Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 17,
+"name": "Side Laterals to Front Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 18,
+"name": "Cable Seated Lateral Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 22,
+"name": "Decline Reverse Crunch",
+"category": "abs",
+"muscle_groups": [
+"abs"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 25,
+"name": "Incline Inner Biceps Curl",
+"category": "arms",
+"muscle_groups": [
+"biceps"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 26,
+"name": "Seated Dumbbell Inner Biceps Curl",
+"category": "arms",
+"muscle_groups": [
+"biceps"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 27,
+"name": "Standing Biceps Cable Curl",
+"category": "arms",
+"muscle_groups": [
+"biceps"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 28,
+"name": "Machine Bicep Curl",
+"category": "arms",
+"muscle_groups": [
+"biceps"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 29,
+"name": "Machine Preacher Curls",
+"category": "arms",
+"muscle_groups": [
+"biceps"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 30,
+"name": "Standing Inner-Biceps Curl",
+"category": "arms",
+"muscle_groups": [
+"biceps"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 31,
+"name": "Cable Incline Triceps Extension",
+"category": "arms",
+"muscle_groups": [
+"triceps"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 32,
+"name": "Cable Lying Triceps Extension",
+"category": "arms",
+"muscle_groups": [
+"triceps"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 33,
+"name": "Decline Dumbbell Triceps Extension",
+"category": "arms",
+"muscle_groups": [
+"triceps"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 34,
+"name": "Decline EZ Bar Triceps Extension",
+"category": "arms",
+"muscle_groups": [
+"triceps"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 43,
+"name": "Kneeling Cable Crunch With Alternating Oblique Twists",
+"category": "abs",
+"muscle_groups": [
+"abs"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 44,
+"name": "Bent-Knee Hip Raise",
+"category": "abs",
+"muscle_groups": [
+"abs"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 45,
+"name": "Knee/Hip Raise On Parallel Bars",
+"category": "abs",
+"muscle_groups": [
+"abs"
+],
+"equipment": "other",
+"difficulty": "beginner"
+},
+{
+"id": 48,
+"name": "Cross-Body Crunch",
+"category": "abs",
+"muscle_groups": [
+"abs"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 49,
+"name": "Barbell Shrug",
+"category": "back",
+"muscle_groups": [
+"traps"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 50,
+"name": "Cable Shrugs",
+"category": "back",
+"muscle_groups": [
+"traps"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 51,
+"name": "Dumbbell Shrug",
+"category": "back",
+"muscle_groups": [
+"traps"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 55,
+"name": "Stiff Leg Barbell Good Morning",
+"category": "back",
+"muscle_groups": [
+"erectors"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 67,
+"name": "Single Leg Glute Bridge",
+"category": "legs",
+"muscle_groups": [
+"glutes"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 68,
+"name": "Physioball Hip Bridge",
+"category": "legs",
+"muscle_groups": [
+"glutes"
+],
+"equipment": "exercise ball",
+"difficulty": "beginner"
+},
+{
+"id": 69,
+"name": "Barbell Glute Bridge",
+"category": "legs",
+"muscle_groups": [
+"glutes"
+],
+"equipment": "barbell",
+"difficulty": "intermediate"
+},
+{
+"id": 70,
+"name": "Barbell Hip Thrust",
+"category": "legs",
+"muscle_groups": [
+"glutes"
+],
+"equipment": "barbell",
+"difficulty": "intermediate"
+},
+{
+"id": 71,
+"name": "Glute Kickback",
+"category": "legs",
+"muscle_groups": [
+"glutes"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 91,
+"name": "Alternating Deltoid Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 93,
+"name": "Band Pull Apart",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "bands",
+"difficulty": "beginner"
+},
+{
+"id": 94,
+"name": "Barbell Rear Delt Row",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 95,
+"name": "Barbell Squat",
+"category": "legs",
+"muscle_groups": [
+"thighs-front",
+"glutes"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 96,
+"name": "Bent Over Dumbbell Rear Delt Raise With Head On Bench",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 97,
+"name": "Cable Rear Delt Fly",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 98,
+"name": "Cable Rope Rear-Delt Rows",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 99,
+"name": "Dumbbell Lying One-Arm Rear Lateral Raise",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 100,
+"name": "Dumbbell Lying Rear Lateral Raise",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 101,
+"name": "Dumbbell One-Arm Upright Row",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 102,
+"name": "Dumbbell Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 103,
+"name": "Face Pull",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "cable",
+"difficulty": "intermediate"
+},
+{
+"id": 104,
+"name": "Lateral Raise - With Bands",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "bands",
+"difficulty": "beginner"
+},
+{
+"id": 105,
+"name": "Lying One-Arm Lateral Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 106,
+"name": "Lying Rear Delt Raise",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 107,
+"name": "One-Arm Incline Lateral Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 108,
+"name": "Reverse Flyes",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 109,
+"name": "Reverse Flyes With External Rotation",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 110,
+"name": "Reverse Machine Flyes",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 111,
+"name": "Seated Bent-Over Rear Delt Raise",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 114,
+"name": "Single Dumbbell Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 115,
+"name": "Sled Reverse Flye",
+"category": "shoulders",
+"muscle_groups": [
+"rear-delts"
+],
+"equipment": "other",
+"difficulty": "beginner"
+},
+{
+"id": 116,
+"name": "Smith Machine One-Arm Upright Row",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 117,
+"name": "Standing Low-Pulley Deltoid Raise",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 118,
+"name": "Upright Barbell Row",
+"category": "shoulders",
+"muscle_groups": [
+"side-delts"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 119,
+"name": "Close-Grip Barbell Bench Press",
+"category": "arms",
+"muscle_groups": [
+"chest"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 120,
+"name": "Smith Machine Overhead Shoulder Press",
+"category": "shoulders",
+"muscle_groups": [
+"front-delts"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 121,
+"name": "Arnold Dumbbell Press",
+"category": "shoulders",
+"muscle_groups": [
+"front-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 122,
+"name": "Kettlebell Arnold Press",
+"category": "shoulders",
+"muscle_groups": [
+"front-delts"
+],
+"equipment": "kettlebells",
+"difficulty": "intermediate"
+},
+{
+"id": 123,
+"name": "Alternating Cable Shoulder Press",
+"category": "shoulders",
+"muscle_groups": [
+"front-delts"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 124,
+"name": "Anti-Gravity Press",
+"category": "shoulders",
+"muscle_groups": [
+"front-delts"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 125,
+"name": "Bradford/Rocky Presses",
+"category": "shoulders",
+"muscle_groups": [
+"front-delts"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 126,
+"name": "Dips - Triceps Version",
+"category": "arms",
+"muscle_groups": [
+"triceps"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 127,
+"name": "Cable Rope Overhead Triceps Extension",
+"category": "arms",
+"muscle_groups": [
+"triceps"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 129,
+"name": "Cable Wrist Curl",
+"category": "arms",
+"muscle_groups": [
+"forearms"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 130,
+"name": "Palms-Down Dumbbell Wrist Curl Over A Bench",
+"category": "arms",
+"muscle_groups": [
+"forearms"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 131,
+"name": "Palms-Down Wrist Curl Over A Bench",
+"category": "arms",
+"muscle_groups": [
+"forearms"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 132,
+"name": "Palms-Up Barbell Wrist Curl Over A Bench",
+"category": "arms",
+"muscle_groups": [
+"forearms"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 133,
+"name": "Palms-Up Dumbbell Wrist Curl Over A Bench",
+"category": "arms",
+"muscle_groups": [
+"forearms"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 134,
+"name": "Decline Oblique Crunch",
+"category": "abs",
+"muscle_groups": [
+"abs"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 135,
+"name": "Barbell Shrug Behind The Back",
+"category": "back",
+"muscle_groups": [
+"traps"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 136,
+"name": "Leverage Shrug",
+"category": "back",
+"muscle_groups": [
+"traps"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 138,
+"name": "Hyperextensions (Back Extensions)",
+"category": "back",
+"muscle_groups": [
+"erectors"
+],
+"equipment": "other",
+"difficulty": "beginner"
+},
+{
+"id": 139,
+"name": "Hyperextensions With No Hyperextension Bench",
+"category": "back",
+"muscle_groups": [
+"erectors"
+],
+"equipment": "body only",
+"difficulty": "intermediate"
+},
+{
+"id": 140,
+"name": "Good Morning",
+"category": "legs",
+"muscle_groups": [
+"erectors"
+],
+"equipment": "barbell",
+"difficulty": "intermediate"
+},
+{
+"id": 141,
+"name": "Good Morning off Pins",
+"category": "legs",
+"muscle_groups": [
+"erectors"
+],
+"equipment": "barbell",
+"difficulty": "intermediate"
+},
+{
+"id": 142,
+"name": "Hanging Bar Good Morning",
+"category": "legs",
+"muscle_groups": [
+"erectors"
+],
+"equipment": "barbell",
+"difficulty": "intermediate"
+},
+{
+"id": 143,
+"name": "Close-Grip Front Lat Pulldown",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 144,
+"name": "One Arm Lat Pulldown",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 145,
+"name": "Wide-Grip Lat Pulldown",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 146,
+"name": "Full Range-Of-Motion Lat Pulldown",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "cable",
+"difficulty": "intermediate"
+},
+{
+"id": 147,
+"name": "Kneeling High Pulley Row",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 148,
+"name": "Kneeling Single-Arm High Pulley Row",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 149,
+"name": "Butt Lift (Bridge)",
+"category": "legs",
+"muscle_groups": [
+"glutes"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 150,
+"name": "Barbell Side Split Squat",
+"category": "legs",
+"muscle_groups": [
+"thighs-front",
+"glutes"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 151,
+"name": "Bodyweight Squat",
+"category": "legs",
+"muscle_groups": [
+"thighs-front",
+"glutes"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 152,
+"name": "Chair Squat",
+"category": "legs",
+"muscle_groups": [
+"thighs-front",
+"glutes"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 153,
+"name": "Dumbbell Squat",
+"category": "legs",
+"muscle_groups": [
+"thighs-front",
+"glutes"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 154,
+"name": "Hack Squat",
+"category": "legs",
+"muscle_groups": [
+"thighs-front",
+"glutes"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 155,
+"name": "Smith Machine Stiff-Legged Deadlift",
+"category": "legs",
+"muscle_groups": [
+"thighs-back",
+"glutes"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 156,
+"name": "Stiff-Legged Dumbbell Deadlift",
+"category": "legs",
+"muscle_groups": [
+"thighs-back",
+"glutes"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 157,
+"name": "Romanian Deadlift",
+"category": "legs",
+"muscle_groups": [
+"thighs-back",
+"glutes"
+],
+"equipment": "barbell",
+"difficulty": "intermediate"
+},
+{
+"id": 158,
+"name": "Stiff-Legged Barbell Deadlift",
+"category": "legs",
+"muscle_groups": [
+"thighs-back",
+"glutes"
+],
+"equipment": "barbell",
+"difficulty": "intermediate"
+},
+{
+"id": 159,
+"name": "Cable Deadlifts",
+"category": "legs",
+"muscle_groups": [
+"thighs-back",
+"glutes",
+"erectors"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 160,
+"name": "Leverage Deadlift",
+"category": "legs",
+"muscle_groups": [
+"thighs-back",
+"glutes",
+"erectors"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 161,
+"name": "Barbell Seated Calf Raise",
+"category": "legs",
+"muscle_groups": [
+"calves-front",
+"calves-back"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 162,
+"name": "Calf Press",
+"category": "legs",
+"muscle_groups": [
+"calves-front",
+"calves-back"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 163,
+"name": "Calf-Machine Shoulder Shrug",
+"category": "back",
+"muscle_groups": [
+"traps"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 164,
+"name": "Dumbbell Seated One-Leg Calf Raise",
+"category": "legs",
+"muscle_groups": [
+"calves-front",
+"calves-back"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 165,
+"name": "Rocking Standing Calf Raise",
+"category": "legs",
+"muscle_groups": [
+"calves-front",
+"calves-back"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 166,
+"name": "Seated Calf Raise",
+"category": "legs",
+"muscle_groups": [
+"calves-front",
+"calves-back"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 167,
+"name": "Barbell Curl",
+"category": "arms",
+"muscle_groups": [
+"biceps"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 168,
+"name": "Barbell Deadlift",
+"category": "back",
+"muscle_groups": [
+"thighs-back",
+"glutes",
+"erectors"
+],
+"equipment": "barbell",
+"difficulty": "intermediate"
+},
+{
+"id": 169,
+"name": "Barbell Shoulder Press",
+"category": "shoulders",
+"muscle_groups": [
+"front-delts"
+],
+"equipment": "barbell",
+"difficulty": "intermediate"
+},
+{
+"id": 170,
+"name": "Bent Over Barbell Row",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "barbell",
+"difficulty": "beginner"
+},
+{
+"id": 171,
+"name": "Chin-Up",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 172,
+"name": "Crunches",
+"category": "abs",
+"muscle_groups": [
+"abs"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 173,
+"name": "Dips - Chest Version",
+"category": "chest",
+"muscle_groups": [
+"chest"
+],
+"equipment": "other",
+"difficulty": "intermediate"
+},
+{
+"id": 174,
+"name": "Dumbbell Bicep Curl",
+"category": "arms",
+"muscle_groups": [
+"biceps"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 175,
+"name": "Dumbbell Flyes",
+"category": "chest",
+"muscle_groups": [
+"chest"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 176,
+"name": "Dumbbell Lunges",
+"category": "legs",
+"muscle_groups": [
+"thighs-front",
+"glutes"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 177,
+"name": "Dumbbell Shoulder Press",
+"category": "shoulders",
+"muscle_groups": [
+"front-delts"
+],
+"equipment": "dumbbell",
+"difficulty": "intermediate"
+},
+{
+"id": 178,
+"name": "EZ-Bar Skullcrusher",
+"category": "arms",
+"muscle_groups": [
+"triceps"
+],
+"equipment": "e-z curl bar",
+"difficulty": "beginner"
+},
+{
+"id": 179,
+"name": "Hammer Curls",
+"category": "arms",
+"muscle_groups": [
+"biceps"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 180,
+"name": "Hanging Leg Raise",
+"category": "abs",
+"muscle_groups": [
+"abs"
+],
+"equipment": "body only",
+"difficulty": "expert"
+},
+{
+"id": 181,
+"name": "Leg Extensions",
+"category": "legs",
+"muscle_groups": [
+"thighs-front"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 182,
+"name": "Leg Press",
+"category": "legs",
+"muscle_groups": [
+"thighs-front",
+"glutes"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 183,
+"name": "Lying Leg Curls",
+"category": "legs",
+"muscle_groups": [
+"thighs-back",
+"glutes"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 184,
+"name": "Plank",
+"category": "abs",
+"muscle_groups": [
+"abs"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 185,
+"name": "Pullups",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 186,
+"name": "Pushups",
+"category": "chest",
+"muscle_groups": [
+"chest"
+],
+"equipment": "body only",
+"difficulty": "beginner"
+},
+{
+"id": 187,
+"name": "Seated Cable Rows",
+"category": "back",
+"muscle_groups": [
+"lats"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 188,
+"name": "Standing Calf Raises",
+"category": "legs",
+"muscle_groups": [
+"calves-front",
+"calves-back"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+},
+{
+"id": 189,
+"name": "Triceps Pushdown",
+"category": "arms",
+"muscle_groups": [
+"triceps"
+],
+"equipment": "cable",
+"difficulty": "beginner"
+},
+{
+"id": 190,
+"name": "Seated Dumbbell Palms-Down Wrist Curl",
+"category": "arms",
+"muscle_groups": [
+"forearms"
+],
+"equipment": "dumbbell",
+"difficulty": "beginner"
+},
+{
+"id": 191,
+"name": "Smith Machine Calf Raise",
+"category": "legs",
+"muscle_groups": [
+"calves-front",
+"calves-back"
+],
+"equipment": "machine",
+"difficulty": "beginner"
+}
+]

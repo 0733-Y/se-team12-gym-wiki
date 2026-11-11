@@ -87,6 +87,8 @@ EXERCISE_GROUP_OVERRIDES = {
     'reverse machine flyes': ['rear-delts'],
     'seated bent-over rear delt raise': ['rear-delts'],
     'sled reverse flye': ['rear-delts'],
+    # 新增：名字里有 calf 但练的是斜方肌
+    'calf-machine shoulder shrug': ['traps'],
 }
 
 REAR_DELT_RE = r'rear lateral|rear delt|reverse fly|face pull|band pull apart|pull apart'
@@ -100,7 +102,8 @@ NAME_PRIORITY_RULES = [
     (r'deadlift', ['thighs-back', 'glutes', 'erectors']),
     (r'calf|calves', ['calves-front', 'calves-back']),
     (r'knee raise|leg raise|hip raise|crunch|plank|sit-?up|oblique', ['abs']),
-    (r'pull ups?|pull-up|chin-up|pulldown|lat|row', ['lats']),
+    # 修正：lat / row 加词边界，旧写法会把 "Plate"、"Lateral"、"Narrow" 也算成背阔肌
+    (r'pull ?ups?|pull-up|chin-up|pulldown|lats?|rows?', ['lats']),
     (r'shrug', ['traps']),
     (r'back extension|hyperextension|good morning', ['erectors']),
     (REAR_DELT_RE, ['rear-delts']),
@@ -108,7 +111,8 @@ NAME_PRIORITY_RULES = [
     (r'shoulder press|overhead press|front raise|front delt|military press|arnold', ['front-delts']),
     (r'triceps|pushdown|skullcrusher', ['triceps']),
     # 修正旧顺序：wrist curl 等先归小臂，再用 curl 归二头
-    (r'wrist|forearm|grip|pinch|pronation|supination', ['forearms']),
+    # grip 前面是连字符时（Close-Grip、Wide-Grip）说的是握距，不是握力训练
+    (r'wrist|forearm|(?<!-)grip|pinch|pronation|supination', ['forearms']),
     (r'biceps|curl', ['biceps']),
 ]
 
@@ -195,63 +199,83 @@ def map_category(exercise):
     return None
 
 
+# 只导入力量训练类；源数据里的拉伸、放松、增强式、有氧等不属于动作库范围
+ALLOWED_SOURCE_CATEGORIES = ('strength', 'powerlifting')
+COMMON_EQUIPMENT = ('barbell', 'dumbbell', 'cable', 'machine', 'body only')
+
+# 常见基础动作：源数据里有就一定导入，保证每个肌群都有大家认识的动作
+ESSENTIAL_NAMES = (
+    'Barbell Bench Press - Medium Grip', 'Dumbbell Bench Press', 'Pushups', 'Dumbbell Flyes', 'Dips - Chest Version',
+    'Pullups', 'Chin-Up', 'Wide-Grip Lat Pulldown', 'Seated Cable Rows', 'Bent Over Barbell Row',
+    'Barbell Deadlift', 'Romanian Deadlift', 'Hyperextensions (Back Extensions)', 'Barbell Shrug',
+    'Barbell Shoulder Press', 'Dumbbell Shoulder Press', 'Arnold Dumbbell Press', 'Front Dumbbell Raise',
+    'Side Lateral Raise', 'Face Pull', 'Reverse Flyes',
+    'Barbell Curl', 'Dumbbell Bicep Curl', 'Hammer Curls', 'Triceps Pushdown', 'Dips - Triceps Version',
+    'EZ-Bar Skullcrusher', 'Palms-Up Barbell Wrist Curl Over A Bench',
+    'Crunches', 'Plank', 'Hanging Leg Raise',
+    'Barbell Squat', 'Leg Press', 'Dumbbell Lunges', 'Leg Extensions', 'Lying Leg Curls',
+    'Barbell Hip Thrust', 'Barbell Glute Bridge', 'Standing Calf Raises', 'Seated Calf Raise',
+)
+
+
 def _usable(exercise):
     name = str(exercise.get('name', '')).strip()
     return bool(name) and len(name) <= 100 and exercise.get('instructions') and exercise.get('images')
 
 
-def _matches_fine_group(exercise, definition):
-    muscles = set(_lower_list(exercise.get('primaryMuscles')) + _lower_list(exercise.get('secondaryMuscles')))
-    name = str(exercise.get('name', '')).lower()
-    if any(term in name for term in definition.get('exclude', ())):
-        return False
-    if muscles.intersection(definition['muscles']):
-        return True
-    return any(term in name for term in definition['terms'])
+def _in_scope(exercise):
+    return _usable(exercise) and exercise.get('category') in ALLOWED_SOURCE_CATEGORIES and map_category(exercise)
 
 
-def _fine_group_score(exercise, definition):
+def _selection_group(groups):
+    """用判定出的主肌群分组；小腿前后两个 id 的动作相同，合成一组选。"""
+    primary = groups[0]
+    return 'calves' if primary.startswith('calves') else primary
+
+
+def _selection_score(exercise, group_id):
     name = str(exercise.get('name', '')).lower()
     score = 0
-    if set(_lower_list(exercise.get('primaryMuscles'))).intersection(definition['muscles']):
-        score += 20
-    for index, term in enumerate(definition['terms']):
+    for index, term in enumerate(FINE_GROUPS[group_id]['terms']):
         if term in name:
             score += 18 - index
+    if (exercise.get('equipment') or '').lower() in COMMON_EQUIPMENT:
+        score += 4
+    if exercise.get('mechanic') == 'compound':
+        score += 3
     if exercise.get('level') == 'beginner':
         score += 2
     return score
 
 
 def select_exercises(exercises, limit_per_group):
-    """每个分组按得分选前 N 个；另外把人工修正表里出现的动作也一并选入。
-    返回 [(源数据, category)]，按名称去重。"""
+    """每个细分肌群按得分选前 N 个，再补上基础动作表和人工修正表里的动作。
+    返回 [(源数据, category)]，按名称去重。
+    与旧逻辑的区别：按判定出的主肌群分组（旧逻辑按"第一个命中的分组"，名字含 bench 的都进了胸部），
+    并且只取力量训练类。"""
+    candidates = [e for e in exercises if _in_scope(e)]
     grouped = {group_id: [] for group_id in FINE_GROUPS}
-    for exercise in exercises:
-        if not _usable(exercise):
-            continue
-        for group_id, definition in FINE_GROUPS.items():
-            if _matches_fine_group(exercise, definition):
-                grouped[group_id].append(exercise)
-                break
+    for exercise in candidates:
+        groups = resolve_muscle_groups(exercise, map_category(exercise))
+        grouped[_selection_group(groups)].append(exercise)
 
     selected, seen = [], set()
-    for group_id, candidates in grouped.items():
-        definition = FINE_GROUPS[group_id]
-        candidates.sort(key=lambda item: _fine_group_score(item, definition), reverse=True)
-        for exercise in candidates[:limit_per_group]:
-            # 分类按源数据肌肉判定；旧代码用分组的分类，会把 "Wrist Curl Over A Bench" 归到胸部
-            selected.append((exercise, map_category(exercise) or definition['category']))
+
+    def take(exercise):
+        if exercise['name'] not in seen:
+            selected.append((exercise, map_category(exercise)))
             seen.add(exercise['name'])
 
-    for exercise in exercises:
-        if exercise.get('name') in seen or not _usable(exercise):
-            continue
-        if str(exercise['name']).lower() in EXERCISE_GROUP_OVERRIDES:
-            category = map_category(exercise)
-            if category:
-                selected.append((exercise, category))
-                seen.add(exercise['name'])
+    for group_id, items in grouped.items():
+        # 同分时按名称排，保证每次导入结果一致
+        items.sort(key=lambda item: (-_selection_score(item, group_id), item['name']))
+        for exercise in items[:limit_per_group]:
+            take(exercise)
+
+    must_have = {name.lower() for name in ESSENTIAL_NAMES} | set(EXERCISE_GROUP_OVERRIDES)
+    for exercise in candidates:
+        if str(exercise['name']).lower() in must_have:
+            take(exercise)
     return selected
 
 

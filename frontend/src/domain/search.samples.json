@@ -1,0 +1,12 @@
+[
+  { "exercise": "Barbell Bench Press - Medium Grip", "ko": "벤치프레스", "zh": "卧推", "en": "bench press" },
+  { "exercise": "Barbell Squat", "ko": "스쿼트", "zh": "深蹲", "en": "squat" },
+  { "exercise": "Barbell Deadlift", "ko": "데드리프트", "zh": "硬拉", "en": "deadlift" },
+  { "exercise": "Pullups", "ko": "풀업", "zh": "引体向上", "en": "pull up" },
+  { "exercise": "Wide-Grip Lat Pulldown", "ko": "풀다운", "zh": "下拉", "en": "pulldown" },
+  { "exercise": "Barbell Curl", "ko": "컬", "zh": "弯举", "en": "curl" },
+  { "exercise": "Side Lateral Raise", "ko": "레터럴 레이즈", "zh": "侧平举", "en": "lateral raise" },
+  { "exercise": "Face Pull", "ko": "페이스 풀", "zh": "面拉", "en": "face pull" },
+  { "exercise": "Crunches", "ko": "크런치", "zh": "卷腹", "en": "crunch" },
+  { "exercise": "Standing Calf Raises", "ko": "카프 레이즈", "zh": "提踵", "en": "calf raise" }
+]

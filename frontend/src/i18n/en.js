@@ -234,4 +234,16 @@ export default {
   errConflict: 'Data conflict. Please refresh and try again.',
   errServer: 'Server error. Please try again later.',
   errNetwork: 'Cannot reach the server. Check your network or whether the backend is running.',
+  // P4 新增：动作库与详情
+  difficulty: 'Difficulty',
+  equipment: 'Equipment',
+  dataSource: 'Source',
+  license: 'License',
+  generatedStepsNote: 'No reviewed translation yet. These are general practice tips.',
+  originalText: 'Original (English)',
+  exerciseNotFound: 'This exercise could not be found.',
+  clearSearch: 'Clear search',
+  muscleFilter: 'Muscle filter',
+  bodyMapHint: 'Tap the body map or a button below to filter exercises.',
+  noImage: 'No image',
 }

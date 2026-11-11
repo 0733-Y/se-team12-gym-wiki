@@ -76,3 +76,52 @@ class ResolveGroupsTests(TestCase):
 
     def test_category_fallback(self):
         self.assertEqual(self.resolve('Mystery Move', [], 'back'), ['lats'])
+
+
+def _source(name, primary, category='strength', **extra):
+    return {'name': name, 'primaryMuscles': primary, 'secondaryMuscles': [], 'category': category,
+            'instructions': ['do it'], 'images': ['x/0.jpg'], 'level': 'beginner', **extra}
+
+
+class SelectionTests(TestCase):
+    """导入时的选取规则。"""
+
+    def test_word_boundaries_in_name_rules(self):
+        # 旧规则里的 lat / row 会误伤 Plate、Lateral、Narrow
+        resolve = importing.resolve_muscle_groups
+        self.assertEqual(resolve(_source('Front Plate Raise', ['shoulders']), 'shoulders'), ['front-delts'])
+        self.assertEqual(resolve(_source('Plate Pinch', ['forearms']), 'arms'), ['forearms'])
+        self.assertEqual(resolve(_source('Narrow Stance Hack Squats', ['quadriceps']), 'legs'),
+                         ['thighs-front', 'glutes'])
+        self.assertEqual(resolve(_source('Wide-Grip Lat Pulldown', ['lats']), 'back'), ['lats'])
+        self.assertEqual(resolve(_source('Seated Cable Rows', ['middle back']), 'back'), ['lats'])
+        self.assertEqual(resolve(_source('Pullups', ['lats']), 'back'), ['lats'])
+        self.assertEqual(resolve(_source('Close-Grip Dumbbell Press', ['triceps']), 'arms'), ['triceps'])
+        self.assertEqual(resolve(_source('Calf-Machine Shoulder Shrug', ['traps']), 'back'), ['traps'])
+
+    def test_only_strength_categories_are_selected(self):
+        source = [
+            _source('Barbell Curl', ['biceps']),
+            _source('Biceps Stretch', ['biceps'], category='stretching'),
+            _source('Box Jump', ['quadriceps'], category='plyometrics'),
+            _source('Barbell Hip Thrust', ['glutes'], category='powerlifting'),
+        ]
+        names = [e['name'] for e, _ in importing.select_exercises(source, 6)]
+        self.assertEqual(sorted(names), ['Barbell Curl', 'Barbell Hip Thrust'])
+
+    def test_limit_per_group_and_essentials(self):
+        curls = [_source(f'Curl Variation {i}', ['biceps']) for i in range(5)]
+        source = curls + [_source('Hammer Curls', ['biceps'], equipment='other', level='expert')]
+        names = [e['name'] for e, _ in importing.select_exercises(source, 2)]
+        self.assertEqual(len([n for n in names if n.startswith('Curl Variation')]), 2)
+        self.assertIn('Hammer Curls', names)  # 基础动作表里的，超出名额也导入
+        self.assertEqual(len(names), len(set(names)))
+
+    def test_prune_removes_only_stale_imported_rows(self):
+        run_import()
+        Exercise.objects.create(name='Old Import', category='chest', source_name=importing.SOURCE_NAME)
+        Exercise.objects.create(name='Hand Made', category='chest', source_name='manual')
+        run_import(prune=True)
+        self.assertFalse(Exercise.objects.filter(name='Old Import').exists())
+        self.assertTrue(Exercise.objects.filter(name='Hand Made').exists())
+        self.assertEqual(Exercise.objects.count(), 9)
