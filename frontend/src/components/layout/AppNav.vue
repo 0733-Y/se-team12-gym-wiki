@@ -42,6 +42,15 @@ const ui = useUiStore()
   color: var(--accent);
 }
 
+/* 720–1119px：顶栏放不下品牌 + 五个链接 + 语言切换，导航换到第二行 */
+@media (min-width: 720px) and (max-width: 1119px) {
+  .app-nav {
+    order: 3;
+    flex-basis: 100%;
+    overflow-x: auto;
+  }
+}
+
 /* 360px：导航改为底部标签栏 */
 @media (max-width: 719px) {
   .app-nav {
